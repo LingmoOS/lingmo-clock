@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
+<context>
+    <name>AlarmView</name>
+    <message>
+        <source>闹钟</source>
+        <translation>闹钟</translation>
+    </message>
+</context>
+<context>
+    <name>TimerView</name>
+    <message>
+        <source>计时器</source>
+        <translation>计时器</translation>
+    </message>
+    <message>
+        <source>小时</source>
+        <translation>小时</translation>
+    </message>
+    <message>
+        <source>分钟</source>
+        <translation>分钟</translation>
+    </message>
+    <message>
+        <source>秒钟</source>
+        <translation>秒钟</translation>
+    </message>
+    <message>
+        <source>开始</source>
+        <translation>开始</translation>
+    </message>
+    <message>
+        <source>暂停</source>
+        <translation>暂停</translation>
+    </message>
+    <message>
+        <source>继续</source>
+        <translation>继续</translation>
+    </message>
+    <message>
+        <source>重置</source>
+        <translation>重置</translation>
+    </message>
+    <message>
+        <source>倒计时结束</source>
+        <translation>倒计时结束</translation>
+    </message>
+    <message>
+        <source>设定的时间已到</source>
+        <translation>设定的时间已到</translation>
+    </message>
+</context>
+<context>
+    <name>WorldClockView</name>
+    <message>
+        <source>世界时钟</source>
+        <translation>世界时钟</translation>
+    </message>
+    <message>
+        <source>添加城市</source>
+        <translation>添加城市</translation>
+    </message>
+</context>
+<context>
+    <name>NotificationDialog</name>
+    <message>
+        <source>确定</source>
+        <translation>确定</translation>
+    </message>
+</context>
+<context>
+    <name>StopwatchView</name>
+    <message>
+        <source>秒表</source>
+        <translation>秒表</translation>
+    </message>
+    <message>
+        <source>开始</source>
+        <translation>开始</translation>
+    </message>
+    <message>
+        <source>暂停</source>
+        <translation>暂停</translation>
+    </message>
+    <message>
+        <source>继续</source>
+        <translation>继续</translation>
+    </message>
+    <message>
+        <source>复位</source>
+        <translation>复位</translation>
+    </message>
+    <message>
+        <source>计次</source>
+        <translation>计次</translation>
+    </message>
+</context>
+<context>
+    <name>SideBar</name>
+    <message>
+        <source>世界时钟</source>
+        <translation>世界时钟</translation>
+    </message>
+    <message>
+        <source>闹钟</source>
+        <translation>闹钟</translation>
+    </message>
+    <message>
+        <source>计时器</source>
+        <translation>计时器</translation>
+    </message>
+    <message>
+        <source>秒表</source>
+        <translation>秒表</translation>
+    </message>
+    <message>
+        <source>时钟</source>
+        <translation>时钟</translation>
+    </message>
+</context>
+</TS> 

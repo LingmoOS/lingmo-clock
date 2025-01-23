@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ja_JP">
+<context>
+    <name>AlarmView</name>
+    <message>
+        <source>闹钟</source>
+        <translation>アラーム</translation>
+    </message>
+</context>
+<context>
+    <name>TimerView</name>
+    <message>
+        <source>计时器</source>
+        <translation>タイマー</translation>
+    </message>
+    <message>
+        <source>小时</source>
+        <translation>時間</translation>
+    </message>
+    <message>
+        <source>分钟</source>
+        <translation>分</translation>
+    </message>
+    <message>
+        <source>秒钟</source>
+        <translation>秒</translation>
+    </message>
+    <message>
+        <source>开始</source>
+        <translation>開始</translation>
+    </message>
+    <message>
+        <source>暂停</source>
+        <translation>一時停止</translation>
+    </message>
+    <message>
+        <source>继续</source>
+        <translation>再開</translation>
+    </message>
+    <message>
+        <source>重置</source>
+        <translation>リセット</translation>
+    </message>
+    <message>
+        <source>倒计时结束</source>
+        <translation>タイマー終了</translation>
+    </message>
+    <message>
+        <source>设定的时间已到</source>
+        <translation>設定時間が経過しました</translation>
+    </message>
+</context>
+<context>
+    <name>WorldClockView</name>
+    <message>
+        <source>世界时钟</source>
+        <translation>世界時計</translation>
+    </message>
+    <message>
+        <source>添加城市</source>
+        <translation>都市を追加</translation>
+    </message>
+</context>
+<context>
+    <name>NotificationDialog</name>
+    <message>
+        <source>确定</source>
+        <translation>OK</translation>
+    </message>
+</context>
+<context>
+    <name>StopwatchView</name>
+    <message>
+        <source>秒表</source>
+        <translation>ストップウォッチ</translation>
+    </message>
+    <message>
+        <source>开始</source>
+        <translation>開始</translation>
+    </message>
+    <message>
+        <source>暂停</source>
+        <translation>一時停止</translation>
+    </message>
+    <message>
+        <source>继续</source>
+        <translation>再開</translation>
+    </message>
+    <message>
+        <source>复位</source>
+        <translation>リセット</translation>
+    </message>
+    <message>
+        <source>计次</source>
+        <translation>ラップ</translation>
+    </message>
+</context>
+<context>
+    <name>SideBar</name>
+    <message>
+        <source>世界时钟</source>
+        <translation>世界時計</translation>
+    </message>
+    <message>
+        <source>闹钟</source>
+        <translation>アラーム</translation>
+    </message>
+    <message>
+        <source>计时器</source>
+        <translation>タイマー</translation>
+    </message>
+    <message>
+        <source>秒表</source>
+        <translation>ストップウォッチ</translation>
+    </message>
+    <message>
+        <source>时钟</source>
+        <translation>時計</translation>
+    </message>
+</context>
+</TS> 

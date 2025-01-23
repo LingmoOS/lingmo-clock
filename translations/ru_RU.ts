@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ru_RU">
+<context>
+    <name>AlarmView</name>
+    <message>
+        <source>闹钟</source>
+        <translation>Будильник</translation>
+    </message>
+</context>
+<context>
+    <name>TimerView</name>
+    <message>
+        <source>计时器</source>
+        <translation>Таймер</translation>
+    </message>
+    <message>
+        <source>小时</source>
+        <translation>Часы</translation>
+    </message>
+    <message>
+        <source>分钟</source>
+        <translation>Минуты</translation>
+    </message>
+    <message>
+        <source>秒钟</source>
+        <translation>Секунды</translation>
+    </message>
+    <message>
+        <source>开始</source>
+        <translation>Старт</translation>
+    </message>
+    <message>
+        <source>暂停</source>
+        <translation>Пауза</translation>
+    </message>
+    <message>
+        <source>继续</source>
+        <translation>Продолжить</translation>
+    </message>
+    <message>
+        <source>重置</source>
+        <translation>Сброс</translation>
+    </message>
+    <message>
+        <source>倒计时结束</source>
+        <translation>Таймер завершен</translation>
+    </message>
+    <message>
+        <source>设定的时间已到</source>
+        <translation>Установленное время истекло</translation>
+    </message>
+</context>
+<context>
+    <name>WorldClockView</name>
+    <message>
+        <source>世界时钟</source>
+        <translation>Мировое время</translation>
+    </message>
+    <message>
+        <source>添加城市</source>
+        <translation>Добавить город</translation>
+    </message>
+</context>
+<context>
+    <name>NotificationDialog</name>
+    <message>
+        <source>确定</source>
+        <translation>OK</translation>
+    </message>
+</context>
+<context>
+    <name>StopwatchView</name>
+    <message>
+        <source>秒表</source>
+        <translation>Секундомер</translation>
+    </message>
+    <message>
+        <source>开始</source>
+        <translation>Старт</translation>
+    </message>
+    <message>
+        <source>暂停</source>
+        <translation>Пауза</translation>
+    </message>
+    <message>
+        <source>继续</source>
+        <translation>Продолжить</translation>
+    </message>
+    <message>
+        <source>复位</source>
+        <translation>Сброс</translation>
+    </message>
+    <message>
+        <source>计次</source>
+        <translation>Круг</translation>
+    </message>
+</context>
+<context>
+    <name>SideBar</name>
+    <message>
+        <source>时钟</source>
+        <translation>Часы</translation>
+    </message>
+</context>
+</TS> 
