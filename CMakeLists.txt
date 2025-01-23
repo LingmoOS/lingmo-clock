@@ -45,6 +45,6 @@ target_link_libraries(${PROJECT_NAME}
     KF5::Notifications
 )
 
-install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/translations)
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-install(FILES org.lingmo.clock.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+install(FILES ${QM_FILES} DESTINATION /usr/share/${PROJECT_NAME}/translations)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION /usr/bin)
+install(FILES org.lingmo.clock.desktop DESTINATION /usr/share/applications)
