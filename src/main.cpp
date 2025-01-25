@@ -10,6 +10,7 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusMessage>
+#include <QFile>
 
 // 添加翻译支持
 #include <QTranslator>
