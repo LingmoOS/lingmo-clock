@@ -109,13 +109,15 @@ int main(int argc, char *argv[])
     qmlRegisterType<Notification>("Lingmo.Notification", 1, 0, "Notification");
 
     // 添加翻译支持
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "clock_" + QLocale(locale).name();
-        if (translator.load(":/translations/" + baseName)) {
-            app.installTranslator(&translator);
-            break;
+    QLocale locale;
+    QString qmFilePath = QString("%1/%2.qm").arg("/usr/share/lingmo-clock/translations/").arg(locale.name());
+    if (QFile::exists(qmFilePath)) {
+        QTranslator *translator = new QTranslator(app.instance());
+        if (translator->load(qmFilePath)) {
+        app.installTranslator(translator);
+        }
+        else {
+        translator->deleteLater();
         }
     }
 
