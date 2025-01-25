@@ -7,6 +7,38 @@
         <source>闹钟</source>
         <translation>闹钟</translation>
     </message>
+    <message>
+        <source>周一</source>
+        <translation>周一</translation>
+    </message>
+    <message>
+        <source>周二</source>
+        <translation>周二</translation>
+    </message>
+    <message>
+        <source>周三</source>
+        <translation>周三</translation>
+    </message>
+    <message>
+        <source>周四</source>
+        <translation>周四</translation>
+    </message>
+    <message>
+        <source>周五</source>
+        <translation>周五</translation>
+    </message>
+    <message>
+        <source>周六</source>
+        <translation>周六</translation>
+    </message>
+    <message>
+        <source>周日</source>
+        <translation>周日</translation>
+    </message>
+    <message>
+        <source>仅一次</source>
+        <translation>仅一次</translation>
+    </message>
 </context>
 <context>
     <name>TimerView</name>
@@ -117,6 +149,37 @@
     <message>
         <source>时钟</source>
         <translation>时钟</translation>
+    </message>
+</context>
+<context>
+    <name>AnalogClock</name>
+    <message>
+        <source>星期日</source>
+        <translation>星期日</translation>
+    </message>
+    <message>
+        <source>星期一</source>
+        <translation>星期一</translation>
+    </message>
+    <message>
+        <source>星期二</source>
+        <translation>星期二</translation>
+    </message>
+    <message>
+        <source>星期三</source>
+        <translation>星期三</translation>
+    </message>
+    <message>
+        <source>星期四</source>
+        <translation>星期四</translation>
+    </message>
+    <message>
+        <source>星期五</source>
+        <translation>星期五</translation>
+    </message>
+    <message>
+        <source>星期六</source>
+        <translation>星期六</translation>
     </message>
 </context>
 </TS> 

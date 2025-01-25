@@ -7,6 +7,38 @@
         <source>闹钟</source>
         <translation>アラーム</translation>
     </message>
+    <message>
+        <source>周一</source>
+        <translation>月曜日</translation>
+    </message>
+    <message>
+        <source>周二</source>
+        <translation>火曜日</translation>
+    </message>
+    <message>
+        <source>周三</source>
+        <translation>水曜日</translation>
+    </message>
+    <message>
+        <source>周四</source>
+        <translation>木曜日</translation>
+    </message>
+    <message>
+        <source>周五</source>
+        <translation>金曜日</translation>
+    </message>
+    <message>
+        <source>周六</source>
+        <translation>土曜日</translation>
+    </message>
+    <message>
+        <source>周日</source>
+        <translation>日曜日</translation>
+    </message>
+    <message>
+        <source>仅一次</source>
+        <translation>一度だけ</translation>
+    </message>
 </context>
 <context>
     <name>TimerView</name>
@@ -60,6 +92,98 @@
     <message>
         <source>添加城市</source>
         <translation>都市を追加</translation>
+    </message>
+    <message>
+        <source>北京</source>
+        <translation>北京</translation>
+    </message>
+    <message>
+        <source>东京</source>
+        <translation>東京</translation>
+    </message>
+    <message>
+        <source>首尔</source>
+        <translation>ソウル</translation>
+    </message>
+    <message>
+        <source>新加坡</source>
+        <translation>シンガポール</translation>
+    </message>
+    <message>
+        <source>曼谷</source>
+        <translation>バンコク</translation>
+    </message>
+    <message>
+        <source>新德里</source>
+        <translation>ニューデリー</translation>
+    </message>
+    <message>
+        <source>迪拜</source>
+        <translation>ドバイ</translation>
+    </message>
+    <message>
+        <source>莫斯科</source>
+        <translation>モスクワ</translation>
+    </message>
+    <message>
+        <source>伊斯坦布尔</source>
+        <translation>イスタンブール</translation>
+    </message>
+    <message>
+        <source>柏林</source>
+        <translation>ベルリン</translation>
+    </message>
+    <message>
+        <source>巴黎</source>
+        <translation>パリ</translation>
+    </message>
+    <message>
+        <source>伦敦</source>
+        <translation>ロンドン</translation>
+    </message>
+    <message>
+        <source>开罗</source>
+        <translation>カイロ</translation>
+    </message>
+    <message>
+        <source>约翰内斯堡</source>
+        <translation>ヨハネスブルグ</translation>
+    </message>
+    <message>
+        <source>纽约</source>
+        <translation>ニューヨーク</translation>
+    </message>
+    <message>
+        <source>芝加哥</source>
+        <translation>シカゴ</translation>
+    </message>
+    <message>
+        <source>丹佛</source>
+        <translation>デンバー</translation>
+    </message>
+    <message>
+        <source>洛杉矶</source>
+        <translation>ロサンゼルス</translation>
+    </message>
+    <message>
+        <source>温哥华</source>
+        <translation>バンクーバー</translation>
+    </message>
+    <message>
+        <source>檀香山</source>
+        <translation>ホノルル</translation>
+    </message>
+    <message>
+        <source>悉尼</source>
+        <translation>シドニー</translation>
+    </message>
+    <message>
+        <source>墨尔本</source>
+        <translation>メルボルン</translation>
+    </message>
+    <message>
+        <source>奥克兰</source>
+        <translation>オークランド</translation>
     </message>
 </context>
 <context>
@@ -117,6 +241,37 @@
     <message>
         <source>时钟</source>
         <translation>時計</translation>
+    </message>
+</context>
+<context>
+    <name>AnalogClock</name>
+    <message>
+        <source>星期日</source>
+        <translation>日曜日</translation>
+    </message>
+    <message>
+        <source>星期一</source>
+        <translation>月曜日</translation>
+    </message>
+    <message>
+        <source>星期二</source>
+        <translation>火曜日</translation>
+    </message>
+    <message>
+        <source>星期三</source>
+        <translation>水曜日</translation>
+    </message>
+    <message>
+        <source>星期四</source>
+        <translation>木曜日</translation>
+    </message>
+    <message>
+        <source>星期五</source>
+        <translation>金曜日</translation>
+    </message>
+    <message>
+        <source>星期六</source>
+        <translation>土曜日</translation>
     </message>
 </context>
 </TS> 

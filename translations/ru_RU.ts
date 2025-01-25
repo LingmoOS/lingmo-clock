@@ -7,6 +7,38 @@
         <source>闹钟</source>
         <translation>Будильник</translation>
     </message>
+    <message>
+        <source>周一</source>
+        <translation>Понедельник</translation>
+    </message>
+    <message>
+        <source>周二</source>
+        <translation>Вторник</translation>
+    </message>
+    <message>
+        <source>周三</source>
+        <translation>Среда</translation>
+    </message>
+    <message>
+        <source>周四</source>
+        <translation>Четверг</translation>
+    </message>
+    <message>
+        <source>周五</source>
+        <translation>Пятница</translation>
+    </message>
+    <message>
+        <source>周六</source>
+        <translation>Суббота</translation>
+    </message>
+    <message>
+        <source>周日</source>
+        <translation>Воскресенье</translation>
+    </message>
+    <message>
+        <source>仅一次</source>
+        <translation>Один раз</translation>
+    </message>
 </context>
 <context>
     <name>TimerView</name>
@@ -58,6 +90,98 @@
         <translation>Мировое время</translation>
     </message>
     <message>
+        <source>北京</source>
+        <translation>Пекин</translation>
+    </message>
+    <message>
+        <source>东京</source>
+        <translation>Токио</translation>
+    </message>
+    <message>
+        <source>首尔</source>
+        <translation>Сеул</translation>
+    </message>
+    <message>
+        <source>新加坡</source>
+        <translation>Сингапур</translation>
+    </message>
+    <message>
+        <source>曼谷</source>
+        <translation>Бангкок</translation>
+    </message>
+    <message>
+        <source>新德里</source>
+        <translation>Нью-Дели</translation>
+    </message>
+    <message>
+        <source>迪拜</source>
+        <translation>Дубай</translation>
+    </message>
+    <message>
+        <source>莫斯科</source>
+        <translation>Москва</translation>
+    </message>
+    <message>
+        <source>伊斯坦布尔</source>
+        <translation>Стамбул</translation>
+    </message>
+    <message>
+        <source>柏林</source>
+        <translation>Берлин</translation>
+    </message>
+    <message>
+        <source>巴黎</source>
+        <translation>Париж</translation>
+    </message>
+    <message>
+        <source>伦敦</source>
+        <translation>Лондон</translation>
+    </message>
+    <message>
+        <source>开罗</source>
+        <translation>Каир</translation>
+    </message>
+    <message>
+        <source>约翰内斯堡</source>
+        <translation>Йоханнесбург</translation>
+    </message>
+    <message>
+        <source>纽约</source>
+        <translation>Нью-Йорк</translation>
+    </message>
+    <message>
+        <source>芝加哥</source>
+        <translation>Чикаго</translation>
+    </message>
+    <message>
+        <source>丹佛</source>
+        <translation>Денвер</translation>
+    </message>
+    <message>
+        <source>洛杉矶</source>
+        <translation>Лос-Анджелес</translation>
+    </message>
+    <message>
+        <source>温哥华</source>
+        <translation>Ванкувер</translation>
+    </message>
+    <message>
+        <source>檀香山</source>
+        <translation>Гонолулу</translation>
+    </message>
+    <message>
+        <source>悉尼</source>
+        <translation>Сидней</translation>
+    </message>
+    <message>
+        <source>墨尔本</source>
+        <translation>Мельбурн</translation>
+    </message>
+    <message>
+        <source>奥克兰</source>
+        <translation>Окленд</translation>
+    </message>
+    <message>
         <source>添加城市</source>
         <translation>Добавить город</translation>
     </message>
@@ -101,6 +225,37 @@
     <message>
         <source>时钟</source>
         <translation>Часы</translation>
+    </message>
+</context>
+<context>
+    <name>AnalogClock</name>
+    <message>
+        <source>星期日</source>
+        <translation>Воскресенье</translation>
+    </message>
+    <message>
+        <source>星期一</source>
+        <translation>Понедельник</translation>
+    </message>
+    <message>
+        <source>星期二</source>
+        <translation>Вторник</translation>
+    </message>
+    <message>
+        <source>星期三</source>
+        <translation>Среда</translation>
+    </message>
+    <message>
+        <source>星期四</source>
+        <translation>Четверг</translation>
+    </message>
+    <message>
+        <source>星期五</source>
+        <translation>Пятница</translation>
+    </message>
+    <message>
+        <source>星期六</source>
+        <translation>Суббота</translation>
     </message>
 </context>
 </TS> 
