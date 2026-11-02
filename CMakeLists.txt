@@ -27,6 +27,7 @@ target_link_libraries(clock-core PUBLIC Lingmo::SDKBase)
 
 add_library(clock-ui STATIC
     src/clockwindow.cpp
+    src/views/alarmpage.cpp
     src/views/analogclock.cpp
     src/views/clockpage.cpp
     src/views/stopwatchpage.cpp

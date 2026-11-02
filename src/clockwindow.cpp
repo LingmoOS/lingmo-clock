@@ -3,6 +3,7 @@
 
 #include "clockwindow.h"
 
+#include "views/alarmpage.h"
 #include "views/clockpage.h"
 #include "views/stopwatchpage.h"
 #include "views/timerpage.h"
@@ -67,9 +68,11 @@ public:
     Root()
         : header(addChild<WindowHeader>(kHeaderHeight))
         , switchControl(addChild<SegmentedControl>(
-              std::vector<std::string>{tr("Clock"), tr("World Clock"), tr("Stopwatch"), tr("Timer")},
+              std::vector<std::string>{tr("Clock"), tr("Alarm"), tr("World Clock"), tr("Stopwatch"),
+                                       tr("Timer")},
               SegmentedControl::Style::Segmented))
         , clock(addChild<ClockPage>())
+        , alarm(addChild<AlarmPage>())
         , world(addChild<WorldClockPage>())
         , stopwatch(addChild<StopwatchPage>())
         , timer(addChild<TimerPage>())
@@ -87,13 +90,14 @@ public:
 
     std::vector<Lingmo::ui::View*> pages() const
     {
-        return {clock, world, stopwatch, timer};
+        return {clock, alarm, world, stopwatch, timer};
     }
 
     WindowHeader* header;
     HeaderContent* headerContent;
     SegmentedControl* switchControl;
     ClockPage* clock;
+    AlarmPage* alarm;
     WorldClockPage* world;
     StopwatchPage* stopwatch;
     TimerPage* timer;
@@ -105,7 +109,7 @@ protected:
         header->setGeometry({0, 0, rect.width, kHeaderHeight});
 
         const SizeF switchHint = switchControl->sizeHint();
-        const double switchWidth = std::min(std::max(switchHint.width, 420.0), std::max(240.0, rect.width - 96));
+        const double switchWidth = std::min(std::max(switchHint.width, 620.0), std::max(240.0, rect.width - 96));
         const double switchHeight = switchHint.height;
         const double switchY = kHeaderHeight + 12;
         switchControl->setGeometry(
@@ -142,6 +146,10 @@ ClockWindow::ClockWindow()
         showNotification(tr("Time's up!"));
         m_window.activate();
     });
+    m_root->alarm->setOnAlarm([this](const std::string& time) {
+        showNotification(tr("Alarm ") + time);
+        m_window.activate();
+    });
 
     m_toast = std::make_unique<Toast>(&m_window);
     bindShortcuts();
@@ -167,6 +175,11 @@ SegmentedControl* ClockWindow::pageSwitch() const
 ClockPage* ClockWindow::clockPage() const
 {
     return m_root->clock;
+}
+
+AlarmPage* ClockWindow::alarmPage() const
+{
+    return m_root->alarm;
 }
 
 WorldClockPage* ClockWindow::worldClockPage() const
@@ -201,6 +214,7 @@ void ClockWindow::selectPage(int index)
 void ClockWindow::updateActivePage()
 {
     m_root->clock->setActive(m_currentPage == PageClock);
+    m_root->alarm->setActive(m_currentPage == PageAlarm);
     m_root->world->setActive(m_currentPage == PageWorldClock);
     m_root->stopwatch->setActive(m_currentPage == PageStopwatch);
     m_root->timer->setActive(m_currentPage == PageTimer);
@@ -217,9 +231,10 @@ void ClockWindow::retranslate()
     m_window.setTitle(tr("Clock"));
     m_root->headerContent->title->setText(tr("Clock"));
     m_root->switchControl->setItems(
-        {tr("Clock"), tr("World Clock"), tr("Stopwatch"), tr("Timer")});
+        {tr("Clock"), tr("Alarm"), tr("World Clock"), tr("Stopwatch"), tr("Timer")});
     m_root->switchControl->setCurrentIndex(m_currentPage);
     m_root->clock->retranslate();
+    m_root->alarm->retranslate();
     m_root->world->retranslate();
     m_root->stopwatch->retranslate();
     m_root->timer->retranslate();
@@ -234,7 +249,7 @@ void ClockWindow::bindShortcuts()
     };
     const auto letter = [](char character) { return key::letter(character); };
 
-    // Ctrl+1 to Ctrl+4 show a page; Ctrl+Tab cycles them.
+    // Ctrl+1 to Ctrl+5 show a page; Ctrl+Tab cycles them.
     for (int i = 0; i < PageCount; ++i) {
         bind(ControlModifier, letter(char('1' + i)), [this, i] { selectPage(i); });
     }

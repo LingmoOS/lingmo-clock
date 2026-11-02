@@ -18,3 +18,36 @@ msgstr "秒表"
 #: src/views/clockpage.cpp
 msgid "Timer"
 msgstr "计时器"
+
+#: src
+msgid "Alarm"
+msgstr ""
+
+#: src
+msgid "Alarm on"
+msgstr ""
+
+#: src
+msgid "Alarm off"
+msgstr ""
+
+#: src
+msgid "New alarm"
+msgstr ""
+
+#: src
+msgid "Add"
+msgstr ""
+
+#: src
+msgid "No alarms yet"
+msgstr ""
+
+#: src
+msgid "24h"
+msgstr ""
+
+#: src
+msgid "12h"
+msgstr ""
+

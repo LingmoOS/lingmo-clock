@@ -3,6 +3,7 @@
 
 #include "clockwindow.h"
 
+#include "views/alarmpage.h"
 #include "views/clockpage.h"
 #include "views/stopwatchpage.h"
 #include "views/timerpage.h"
@@ -124,14 +125,14 @@ TEST_F(ClockWindowTest, StartsOnTheClockAndSwitchesPages)
 
 TEST_F(ClockWindowTest, KeyboardShortcutsSwitchPages)
 {
-    pressKey(key::letter('3'), ControlModifier);
+    pressKey(key::letter('4'), ControlModifier);
     EXPECT_EQ(window().currentPageIndex(), int(ClockWindow::PageStopwatch));
 
     pressKey(key::letter('1'), ControlModifier);
     EXPECT_EQ(window().currentPageIndex(), int(ClockWindow::PageClock));
 
     pressKey(key::Tab, ControlModifier);
-    EXPECT_EQ(window().currentPageIndex(), int(ClockWindow::PageWorldClock));
+    EXPECT_EQ(window().currentPageIndex(), int(ClockWindow::PageAlarm));
 
     pressKey(key::Tab, ControlModifier | ShiftModifier);
     EXPECT_EQ(window().currentPageIndex(), int(ClockWindow::PageClock));
@@ -163,6 +164,21 @@ TEST_F(ClockWindowTest, TogglesTheClockFormat)
     window().clockPage()->toggleTwentyFourHourClock();
     spin(10);
     EXPECT_EQ(window().clockPage()->timeText(), "14:05:09");
+}
+
+TEST_F(ClockWindowTest, AlarmPageKeepsItsAlarms)
+{
+    window().selectPage(ClockWindow::PageAlarm);
+    spin(10);
+    ASSERT_EQ(window().alarmPage()->alarmCount(), 1u);
+    ASSERT_TRUE(window().alarmPage()->addAlarm(6, 30));
+    ASSERT_EQ(window().alarmPage()->alarmCount(), 2u);
+    EXPECT_EQ(window().alarmPage()->alarmHour(1), 6);
+    EXPECT_EQ(window().alarmPage()->alarmMinute(1), 30);
+    EXPECT_TRUE(window().alarmPage()->setAlarmEnabled(1, false));
+    EXPECT_FALSE(window().alarmPage()->alarmEnabled(1));
+    ASSERT_TRUE(window().alarmPage()->removeAlarm(1));
+    EXPECT_EQ(window().alarmPage()->alarmCount(), 1u);
 }
 
 TEST_F(ClockWindowTest, StopwatchShortcutsStartLapPauseAndReset)

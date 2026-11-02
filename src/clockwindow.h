@@ -17,6 +17,7 @@ class Toast;
 
 namespace Clock {
 
+class AlarmPage;
 class ClockPage;
 class StopwatchPage;
 class TimerPage;
@@ -29,6 +30,7 @@ class ClockWindow
 public:
     enum Page {
         PageClock = 0,
+        PageAlarm,
         PageWorldClock,
         PageStopwatch,
         PageTimer,
@@ -49,6 +51,7 @@ public:
     Lingmo::ui::SegmentedControl* pageSwitch() const;
 
     ClockPage* clockPage() const;
+    AlarmPage* alarmPage() const;
     WorldClockPage* worldClockPage() const;
     StopwatchPage* stopwatchPage() const;
     TimerPage* timerPage() const;

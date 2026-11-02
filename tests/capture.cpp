@@ -3,6 +3,7 @@
 
 #include "clockwindow.h"
 
+#include "views/alarmpage.h"
 #include "views/clockpage.h"
 #include "views/stopwatchpage.h"
 #include "views/timerpage.h"
@@ -88,6 +89,10 @@ int main(int argc, char** argv)
         window.worldClockPage()->setActive(true);
         spin(200);
         capture(window.window(), directory + "/world-clock-light.png");
+
+        window.selectPage(Clock::ClockWindow::PageAlarm);
+        spin(200);
+        capture(window.window(), directory + "/alarm-light.png");
 
         window.selectPage(Clock::ClockWindow::PageStopwatch);
         window.stopwatchPage()->start();

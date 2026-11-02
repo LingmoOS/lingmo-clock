@@ -25,7 +25,7 @@ ClockPage::ClockPage()
     : m_clock(addChild<AnalogClock>())
     , m_time(addChild<Label>())
     , m_date(addChild<Label>())
-    , m_formatButton(addChild<PillButton>(tr("24h"), PillButton::Style::Ghost))
+    , m_formatButton(addChild<PillButton>(tr("24h"), PillButton::Style::Secondary))
 {
     setName("clockPage");
     m_clock->setName("analogClock");
