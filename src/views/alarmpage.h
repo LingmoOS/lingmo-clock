@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "base/settings.h"
 #include "base/timer.h"
 #include "model/clocktime.h"
 #include "ui/geometry.h"
@@ -56,6 +57,10 @@ public:
     // Checks the alarms against the current time; called by the page's timer.
     void checkAlarms();
 
+    // Saves all alarms to ~/.config/lingmo/clock.conf and loads them back.
+    void saveAlarms();
+    void loadAlarms();
+
 protected:
     void layout() override;
     void paint(Lingmo::ui::Painter& painter) override;
@@ -86,6 +91,7 @@ private:
     NumberStepper* m_minute = nullptr;
     PillButton* m_add = nullptr;
     Lingmo::base::Timer m_tick;
+    Lingmo::base::Settings m_settings;
     std::function<ClockReading()> m_nowSource;
     std::function<void(const std::string&)> m_onAlarm;
     bool m_active = false;

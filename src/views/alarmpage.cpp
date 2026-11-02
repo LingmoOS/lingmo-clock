@@ -6,6 +6,7 @@
 #include "views/widgets.h"
 
 #include "base/i18n.h"
+#include "base/paths.h"
 #include "ui/color_id.h"
 #include "ui/label.h"
 #include "ui/layout.h"
@@ -95,6 +96,7 @@ AlarmPage::AlarmPage()
     , m_hour(addChild<NumberStepper>(0, 23, 7))
     , m_minute(addChild<NumberStepper>(0, 59, 0))
     , m_add(addChild<PillButton>(tr("Add"), PillButton::Style::Accent))
+    , m_settings(Lingmo::base::paths::lingmoConfig("clock"))
 {
     setName("alarmPage");
     m_scroll->setName("alarmScroll");
@@ -124,7 +126,10 @@ AlarmPage::AlarmPage()
     m_tick.setInterval(std::chrono::seconds(1));
     m_tick.onTimeout = [this] { checkAlarms(); };
 
-    addAlarm(7, 0);
+    // Load persisted alarms; fall back to the default 07:00 when none are saved.
+    loadAlarms();
+    if (m_alarms.empty())
+        addAlarm(7, 0);
     rebuildRows();
     // Alarms are checked for the whole life of the window, not only while
     // their page is the visible one.
@@ -146,6 +151,7 @@ bool AlarmPage::addAlarm(int hour, int minute)
         return false;
     m_alarms.push_back({hour, minute, true, false});
     rebuildRows();
+    saveAlarms();
     return true;
 }
 
@@ -155,6 +161,7 @@ bool AlarmPage::removeAlarm(size_t index)
         return false;
     m_alarms.erase(m_alarms.begin() + std::ptrdiff_t(index));
     rebuildRows();
+    saveAlarms();
     return true;
 }
 
@@ -164,6 +171,7 @@ bool AlarmPage::setAlarmEnabled(size_t index, bool enabled)
         return false;
     m_alarms[index].enabled = enabled;
     m_alarms[index].fired = false;
+    saveAlarms();
     return true;
 }
 
@@ -236,6 +244,43 @@ void AlarmPage::checkAlarms()
         alarm.fired = true;
         if (m_onAlarm)
             m_onAlarm(formatAlarm(alarm.hour, alarm.minute));
+    }
+}
+
+void AlarmPage::saveAlarms()
+{
+    // [alarms] stores one "alarm/<n>" key per alarm as "HH:MM,enabled".
+    m_settings.remove("alarms");
+    for (size_t i = 0; i < m_alarms.size(); ++i) {
+        const Alarm& alarm = m_alarms[i];
+        char buffer[32];
+        std::snprintf(buffer, sizeof(buffer), "%02d:%02d,%s",
+                      alarm.hour, alarm.minute, alarm.enabled ? "1" : "0");
+        m_settings.setValue("alarms/" + std::to_string(i), std::string(buffer));
+    }
+    m_settings.setValue("alarms/count", int64_t(m_alarms.size()));
+    m_settings.sync();
+}
+
+void AlarmPage::loadAlarms()
+{
+    m_alarms.clear();
+    const int64_t count = m_settings.intValue("alarms/count", 0);
+    for (int64_t i = 0; i < count; ++i) {
+        const std::string raw = m_settings.stringValue("alarms/" + std::to_string(i));
+        if (raw.empty())
+            continue;
+        Alarm alarm;
+        int hour = -1, minute = -1;
+        char enabledChar = '1';
+        if (std::sscanf(raw.c_str(), "%d:%d,%c", &hour, &minute, &enabledChar) >= 2
+            && hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59) {
+            alarm.hour = hour;
+            alarm.minute = minute;
+            alarm.enabled = enabledChar != '0';
+            alarm.fired = false;
+            m_alarms.push_back(alarm);
+        }
     }
 }
 
