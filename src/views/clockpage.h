@@ -18,6 +18,7 @@ class Label;
 namespace Clock {
 
 class AnalogClock;
+class PillButton;
 
 // The clock's own page: the big analog face over the digital time with its
 // seconds and the date.
@@ -40,6 +41,7 @@ public:
     // Follows the session locale.
     bool usesTwentyFourHourClock() const { return m_twentyFourHour; }
     void setTwentyFourHourClock(bool twentyFourHour);
+    void toggleTwentyFourHourClock();
 
     void retranslate();
     void update();
@@ -56,6 +58,7 @@ private:
     AnalogClock* m_clock;
     Lingmo::ui::Label* m_time;
     Lingmo::ui::Label* m_date;
+    PillButton* m_formatButton;
     Lingmo::base::Timer m_tick;
     std::function<ClockReading()> m_timeSource;
     ClockReading m_reading;

@@ -260,6 +260,10 @@ void ClockWindow::bindShortcuts()
         else if (m_currentPage == PageTimer)
             m_root->timer->reset();
     });
+    bind(NoModifier, letter('t'), [this] {
+        if (m_currentPage == PageClock)
+            m_root->clock->toggleTwentyFourHourClock();
+    });
 
     bind(ControlModifier, letter('q'), [] { Application::instance()->quit(); });
 }

@@ -4,7 +4,9 @@
 #include "views/clockpage.h"
 
 #include "views/analogclock.h"
+#include "views/widgets.h"
 
+#include "base/i18n.h"
 #include "model/timeformat.h"
 #include "ui/color_id.h"
 #include "ui/label.h"
@@ -15,6 +17,7 @@
 
 using namespace Lingmo::ui;
 using namespace std::chrono_literals;
+using Lingmo::i18n::tr;
 
 namespace Clock {
 
@@ -22,9 +25,16 @@ ClockPage::ClockPage()
     : m_clock(addChild<AnalogClock>())
     , m_time(addChild<Label>())
     , m_date(addChild<Label>())
+    , m_formatButton(addChild<PillButton>(tr("24h"), PillButton::Style::Ghost))
 {
     setName("clockPage");
     m_clock->setName("analogClock");
+
+    m_formatButton->setName("formatButton");
+    m_formatButton->setCompact(true);
+    m_formatButton->setMinimumWidth(58);
+    m_formatButton->setFontSize(12.5);
+    m_formatButton->onClicked = [this] { toggleTwentyFourHourClock(); };
 
     m_time->setName("digitalTime");
     m_time->setFontSize(62);
@@ -41,6 +51,7 @@ ClockPage::ClockPage()
     m_date->setVerticallyCentered(true);
 
     m_twentyFourHour = localeUsesTwentyFourHourClock();
+    m_formatButton->setText(m_twentyFourHour ? tr("24h") : tr("12h"));
     m_tick.setInterval(40ms);
     m_tick.onTimeout = [this] { update(); };
     update();
@@ -89,8 +100,14 @@ void ClockPage::setTwentyFourHourClock(bool twentyFourHour)
     if (m_twentyFourHour == twentyFourHour)
         return;
     m_twentyFourHour = twentyFourHour;
+    m_formatButton->setText(m_twentyFourHour ? tr("24h") : tr("12h"));
     m_shownSecond = -1;
     update();
+}
+
+void ClockPage::toggleTwentyFourHourClock()
+{
+    setTwentyFourHourClock(!m_twentyFourHour);
 }
 
 std::string ClockPage::dateTextFor(const ClockReading& reading) const
@@ -126,6 +143,7 @@ void ClockPage::update()
 
 void ClockPage::retranslate()
 {
+    m_formatButton->setText(m_twentyFourHour ? tr("24h") : tr("12h"));
     m_shownSecond = -1;
     m_shownDay = -1;
     update();
@@ -144,6 +162,7 @@ void ClockPage::layout()
     const double gapAfterTime = 4;
     const double total = clockSide + gapAfterClock + timeHeight + gapAfterTime + dateHeight;
     double y = std::max(8.0, (rect.height - total) / 2);
+    m_formatButton->setGeometry({std::max(margin, rect.width - 86), 10, 66, 28});
     m_clock->setGeometry({(rect.width - clockSide) / 2, y, clockSide, clockSide});
     y += clockSide + gapAfterClock;
     m_time->setGeometry({margin, y, rect.width - 2 * margin, timeHeight});

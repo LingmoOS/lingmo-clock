@@ -150,6 +150,21 @@ TEST_F(ClockWindowTest, ClockShowsTheDateAndTheDigitalTime)
     EXPECT_EQ(window().clockPage()->timeText(), "2:05:09 PM");
 }
 
+TEST_F(ClockWindowTest, TogglesTheClockFormat)
+{
+    window().clockPage()->setTimeSource(fixedReading);
+    window().clockPage()->setTwentyFourHourClock(true);
+    spin(10);
+    EXPECT_TRUE(window().clockPage()->usesTwentyFourHourClock());
+    window().clockPage()->toggleTwentyFourHourClock();
+    spin(10);
+    EXPECT_FALSE(window().clockPage()->usesTwentyFourHourClock());
+    EXPECT_EQ(window().clockPage()->timeText(), "2:05:09 PM");
+    window().clockPage()->toggleTwentyFourHourClock();
+    spin(10);
+    EXPECT_EQ(window().clockPage()->timeText(), "14:05:09");
+}
+
 TEST_F(ClockWindowTest, StopwatchShortcutsStartLapPauseAndReset)
 {
     window().selectPage(ClockWindow::PageStopwatch);

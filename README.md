@@ -4,7 +4,7 @@ A native clock, world clock, stopwatch and timer for Lingmo OS.
 
 ## Features
 
-- Analog and digital clock with date
+- Analog and digital clock with date and a 12/24-hour switch
 - World clock for a set of cities
 - Stopwatch with laps
 - Countdown timer with presets
