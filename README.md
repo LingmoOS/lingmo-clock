@@ -1,4 +1,4 @@
-﻿# lingmo-clock
+# lingmo-clock
 
 A native clock, world clock, stopwatch and timer for Lingmo OS.
 
