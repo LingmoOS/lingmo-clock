@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh_CN\n"
+
+#: src/clockwindow.cpp
+msgid "Clock"
+msgstr "时钟"
+
+#: src/views/clockpage.cpp
+msgid "World Clock"
+msgstr "世界时钟"
+
+#: src/views/clockpage.cpp
+msgid "Stopwatch"
+msgstr "秒表"
+
+#: src/views/clockpage.cpp
+msgid "Timer"
+msgstr "计时器"

@@ -1,28 +1,22 @@
+# SPDX-FileCopyrightText: 2026 LingmoOS Contributors
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 Source: lingmo-clock
 Section: utils
 Priority: optional
 Maintainer: Lingmo OS Team <team@lingmo.org>
-Build-Depends: debhelper (>= 11),
-               cmake,
-               qtbase5-dev,
-               qtdeclarative5-dev,
-               qtquickcontrols2-5-dev,
-               qttools5-dev,
-               qttools5-dev-tools,
-               libqt5x11extras5-dev,
-               libkf5notifications-dev,
-               extra-cmake-modules,
-               lingmoui
+Build-Depends: cmake,
+               debhelper-compat (= 13),
+               lingmo-sdk-dev,
+               pkg-config
+Standards-Version: 4.7.2
+Homepage: https://github.com/lingmoos/clock
 
 Package: lingmo-clock
 Architecture: any
-Depends: ${shlibs:Depends},
+Depends: lingmo-sdk-dev,
          ${misc:Depends},
-         qml-module-qtquick2,
-         qml-module-qtquick-controls2,
-         qml-module-qtquick-layouts,
-         qml-module-qt-labs-platform,
-         qml-module-qtgraphicaleffects,
-         lingmoui
-Description: Clock application for Lingmo OS
- Clock application including world clock, timer, stopwatch and alarm functions. 
+         ${shlibs:Depends}
+Description: Lingmo OS Clock
+ A clock with a large analog face and a digital time, a world clock,
+ a stopwatch with laps and a countdown timer.

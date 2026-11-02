@@ -1,50 +1,54 @@
-cmake_minimum_required(VERSION 3.5)
+# SPDX-FileCopyrightText: 2026 LingmoOS Contributors
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-project(lingmo-clock LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.16)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 17)
+project(lingmo-clock VERSION 1.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Core Quick QuickControls2 LinguistTools REQUIRED)
-find_package(KF5Notifications)
+include(GNUInstallDirs)
+include(CTest)
 
-set(PROJECT_SOURCES
-    src/main.cpp
-    src/resources.qrc
+find_package(LingmoSDK REQUIRED)
+
+# The clock's arithmetic: formatting, the stopwatch, the timer and the world
+# clock, with no UI so the tests can drive it directly.
+add_library(clock-core STATIC
+    src/model/clocktime.cpp
+    src/model/countdown_timer.cpp
+    src/model/stopwatch.cpp
+    src/model/timeformat.cpp
+    src/model/worldclock.cpp
 )
+target_include_directories(clock-core PUBLIC src)
+target_link_libraries(clock-core PUBLIC Lingmo::SDKBase)
 
-file(GLOB TS_FILES translations/*.ts)
-foreach(filepath ${TS_FILES})
-    string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" filename ${filepath})
-    list(APPEND ts_files_replaced ${filename})
-endforeach()
-qt5_create_translation(QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} ${ts_files_replaced})
-
-add_custom_target(translations ALL DEPENDS ${QM_FILES} SOURCES ${TS_FILES})
-
-foreach(_ts_file ${TS_FILES})
-    execute_process(
-        COMMAND ${LUPDATE_EXECUTABLE} -recursive ${CMAKE_SOURCE_DIR} -ts ${_ts_file})
-    execute_process(COMMAND lrelease ${_ts_file})
-endforeach()
-
-add_executable(${PROJECT_NAME}
-    ${PROJECT_SOURCES}
-    ${QM_FILES}
+add_library(clock-ui STATIC
+    src/clockwindow.cpp
+    src/views/analogclock.cpp
+    src/views/clockpage.cpp
+    src/views/stopwatchpage.cpp
+    src/views/timerpage.cpp
+    src/views/worldclockpage.cpp
+    src/views/widgets.cpp
 )
+target_include_directories(clock-ui PUBLIC src)
+target_link_libraries(clock-ui PUBLIC clock-core Lingmo::SDK)
 
-target_link_libraries(${PROJECT_NAME}
-    PRIVATE
-    Qt5::Core
-    Qt5::Quick
-    Qt5::QuickControls2
-    KF5::Notifications
-)
+add_executable(lingmo-clock src/main.cpp)
+target_compile_definitions(lingmo-clock PRIVATE CLOCK_VERSION="${PROJECT_VERSION}")
+target_link_libraries(lingmo-clock PRIVATE clock-ui)
 
-install(FILES ${QM_FILES} DESTINATION /usr/share/${PROJECT_NAME}/translations)
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION /usr/bin)
-install(FILES org.lingmo.clock.desktop DESTINATION /usr/share/applications)
+install(TARGETS lingmo-clock RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(FILES icons/lingmo-clock.svg
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+
+lingmo_add_translations(lingmo-clock SOURCES src DESKTOP_FILES lingmo-clock.desktop)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lingmo-clock.desktop
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
