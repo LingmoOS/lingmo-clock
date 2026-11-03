@@ -49,14 +49,22 @@ public:
         setName("navigationItem");
         m_text->setFontSize(13);
         m_text->setWeight(500);
+        setCursorShape(CursorShape::Pointer);
     }
 
     void setSelected(bool selected)
     {
         if (m_selected == selected) return;
         m_selected = selected;
-        invalidate();
+        requestPaint();
     }
+
+    void setText(const std::string& text)
+    {
+        m_text->setText(text);
+    }
+
+    bool acceptsPointer() const override { return true; }
 
     std::function<void()> onClicked;
 
@@ -67,10 +75,10 @@ protected:
         const RectF rect = localRect();
 
         if (m_selected) {
-            painter.fillRect(rect, theme.surfaceVariant);
-            painter.fillRect({0, 0, 3, rect.height}, theme.accent);
+            painter.fillRect(rect, theme.alternateBackground);
+            painter.fillRect({0, 0, 3, rect.height}, theme.highlight);
         } else if (m_hovered) {
-            painter.fillRect(rect, theme.surfaceVariant.withAlpha(0.5));
+            painter.fillRect(rect, theme.alternateBackground.withAlpha(0.5));
         }
     }
 
@@ -89,38 +97,32 @@ protected:
                              std::max(0.0, rect.width - textX - 16), textSize.height});
     }
 
-    bool pointerPress(const PointerEvent& event) override
+    void pointerPress(const PointerEvent& event) override
     {
-        if (event.button == PointerButton::Primary) {
+        if (event.button == MouseButton::Left)
             m_pressed = true;
-            return true;
-        }
-        return false;
     }
 
     void pointerRelease(const PointerEvent& event) override
     {
-        if (m_pressed && event.button == PointerButton::Primary) {
+        if (m_pressed && event.button == MouseButton::Left) {
             m_pressed = false;
-            if (localRect().contains(event.position) && onClicked) {
+            if (localRect().contains(event.position) && onClicked)
                 onClicked();
-            }
         }
     }
 
     void pointerEnter() override
     {
         m_hovered = true;
-        invalidate();
-        setCursor(CursorShape::Pointer);
+        requestPaint();
     }
 
     void pointerLeave() override
     {
         m_hovered = false;
         m_pressed = false;
-        invalidate();
-        setCursor(CursorShape::Default);
+        requestPaint();
     }
 
 private:
@@ -152,12 +154,22 @@ public:
         if (index < 0 || index >= int(m_items.size())) return;
         if (m_currentIndex == index) return;
 
-        if (m_currentIndex >= 0 && m_currentIndex < int(m_items.size())) {
+        if (m_currentIndex >= 0 && m_currentIndex < int(m_items.size()))
             m_items[m_currentIndex]->setSelected(false);
-        }
 
         m_currentIndex = index;
         m_items[index]->setSelected(true);
+    }
+
+    void setItemText(int index, const std::string& text)
+    {
+        if (index >= 0 && index < int(m_items.size()))
+            m_items[index]->setText(text);
+    }
+
+    NavigationItem* itemAt(int index) const
+    {
+        return (index >= 0 && index < int(m_items.size())) ? m_items[index] : nullptr;
     }
 
     int currentIndex() const { return m_currentIndex; }
@@ -169,7 +181,7 @@ protected:
     {
         const Theme& theme = Theme::current();
         const RectF rect = localRect();
-        painter.fillRect(rect, theme.surface);
+        painter.fillRect(rect, theme.secondBackground);
         painter.drawVerticalLine(rect.width - 1, 0, rect.height,
                                  theme.text.withAlpha(0.06), painter.borderWidth(1));
     }
@@ -178,7 +190,6 @@ protected:
     {
         const RectF rect = localRect();
         double y = 12;
-
         for (auto item : m_items) {
             item->setGeometry({0, y, rect.width, kNavItemHeight});
             y += kNavItemHeight;
@@ -275,8 +286,7 @@ protected:
 
     void paint(Painter& painter) override
     {
-        const Theme& theme = Theme::current();
-        painter.fillRect(localRect(), theme.background);
+        painter.fillRect(localRect(), Theme::current().background);
     }
 };
 
@@ -301,13 +311,14 @@ ClockWindow::ClockWindow()
     m_root->sidebar->onItemSelected = [this](int index) { selectPage(index); };
 
     // Wire navigation items click.
-    for (int i = 0; i < 5; ++i) {
-        auto item = static_cast<NavigationItem*>(m_root->sidebar->children()[i].get());
-        item->onClicked = [this, i]() {
-            m_root->sidebar->setCurrentIndex(i);
-            if (m_root->sidebar->onItemSelected) {
-                m_root->sidebar->onItemSelected(i);
-            }
+    for (int i = 0; i < PageCount; ++i) {
+        NavigationItem* item = m_root->sidebar->itemAt(i);
+        if (!item) continue;
+        const int idx = i;
+        item->onClicked = [this, idx]() {
+            m_root->sidebar->setCurrentIndex(idx);
+            if (m_root->sidebar->onItemSelected)
+                m_root->sidebar->onItemSelected(idx);
         };
     }
 
@@ -341,34 +352,16 @@ SegmentedControl* ClockWindow::pageSwitch() const
     return nullptr; // No longer using SegmentedControl
 }
 
-ClockPage* ClockWindow::clockPage() const
-{
-    return m_root->clock;
-}
-
-AlarmPage* ClockWindow::alarmPage() const
-{
-    return m_root->alarm;
-}
-
-WorldClockPage* ClockWindow::worldClockPage() const
-{
-    return m_root->world;
-}
-
-StopwatchPage* ClockWindow::stopwatchPage() const
-{
-    return m_root->stopwatch;
-}
-
-TimerPage* ClockWindow::timerPage() const
-{
-    return m_root->timer;
-}
+ClockPage* ClockWindow::clockPage() const       { return m_root->clock; }
+AlarmPage* ClockWindow::alarmPage() const        { return m_root->alarm; }
+WorldClockPage* ClockWindow::worldClockPage() const { return m_root->world; }
+StopwatchPage* ClockWindow::stopwatchPage() const   { return m_root->stopwatch; }
+TimerPage* ClockWindow::timerPage() const           { return m_root->timer; }
 
 void ClockWindow::showNotification(const std::string& text)
 {
-    m_toast->show(text, Toast::Duration::Short);
+    // Toast::Short is a static constexpr duration, not a nested enum.
+    m_toast->show(text, Toast::Short);
 }
 
 void ClockWindow::selectPage(int index)
@@ -388,32 +381,33 @@ void ClockWindow::updateActivePage()
 
 void ClockWindow::bindShortcuts()
 {
-    m_window.addShortcut(Keys::Control | Keys::Key_1, [this] { selectPage(PageClock); });
-    m_window.addShortcut(Keys::Control | Keys::Key_2, [this] { selectPage(PageAlarm); });
-    m_window.addShortcut(Keys::Control | Keys::Key_3, [this] { selectPage(PageWorldClock); });
-    m_window.addShortcut(Keys::Control | Keys::Key_4, [this] { selectPage(PageStopwatch); });
-    m_window.addShortcut(Keys::Control | Keys::Key_5, [this] { selectPage(PageTimer); });
+    // addShortcut(modifiers, key, action) — key::letter gives the xkb keysym.
+    m_window.addShortcut(ControlModifier, key::letter('1'), [this] { selectPage(PageClock); });
+    m_window.addShortcut(ControlModifier, key::letter('2'), [this] { selectPage(PageAlarm); });
+    m_window.addShortcut(ControlModifier, key::letter('3'), [this] { selectPage(PageWorldClock); });
+    m_window.addShortcut(ControlModifier, key::letter('4'), [this] { selectPage(PageStopwatch); });
+    m_window.addShortcut(ControlModifier, key::letter('5'), [this] { selectPage(PageTimer); });
+    m_window.addShortcut(ControlModifier, key::Tab,
+        [this] { selectPage((m_currentPage + 1) % PageCount); });
+    m_window.addShortcut(ControlModifier | ShiftModifier, key::Tab,
+        [this] { selectPage((m_currentPage + PageCount - 1) % PageCount); });
 }
 
 void ClockWindow::retranslate()
 {
     m_window.setTitle(tr("Clock"));
     m_root->headerContent->title->setText(tr("Clock"));
-
-    // Update sidebar item labels
-    auto items = m_root->sidebar->children();
-    if (items.size() >= 5) {
-        static_cast<NavigationItem*>(items[0].get())->children()[1]->takeChild(0);
-        static_cast<NavigationItem*>(items[0].get())->addChild<Label>(tr("Clock"));
-        static_cast<NavigationItem*>(items[1].get())->children()[1]->takeChild(0);
-        static_cast<NavigationItem*>(items[1].get())->addChild<Label>(tr("Alarm"));
-        static_cast<NavigationItem*>(items[2].get())->children()[1]->takeChild(0);
-        static_cast<NavigationItem*>(items[2].get())->addChild<Label>(tr("World Clock"));
-        static_cast<NavigationItem*>(items[3].get())->children()[1]->takeChild(0);
-        static_cast<NavigationItem*>(items[3].get())->addChild<Label>(tr("Stopwatch"));
-        static_cast<NavigationItem*>(items[4].get())->children()[1]->takeChild(0);
-        static_cast<NavigationItem*>(items[4].get())->addChild<Label>(tr("Timer"));
-    }
+    // Update sidebar labels via the dedicated helper — no children() traversal.
+    m_root->sidebar->setItemText(PageClock,       tr("Clock"));
+    m_root->sidebar->setItemText(PageAlarm,       tr("Alarm"));
+    m_root->sidebar->setItemText(PageWorldClock,  tr("World Clock"));
+    m_root->sidebar->setItemText(PageStopwatch,   tr("Stopwatch"));
+    m_root->sidebar->setItemText(PageTimer,       tr("Timer"));
+    m_root->clock->retranslate();
+    m_root->alarm->retranslate();
+    m_root->world->retranslate();
+    m_root->stopwatch->retranslate();
+    m_root->timer->retranslate();
 }
 
 } // namespace Clock
