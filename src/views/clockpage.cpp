@@ -173,17 +173,21 @@ void ClockPage::layout()
 void ClockPage::paint(Painter& painter)
 {
     const Theme& theme = Theme::current();
-    // A soft, wide halo under the dial from the theme: a card the face sits
-    // on, so the page has some depth on both the light and the dark theme.
+    // The clock sits on a standard rounded card, with the same quiet surface
+    // the other pages use, instead of a full-page halo.
     const RectF rect = localRect();
     if (rect.width < 200 || rect.height < 200)
         return;
-    const double haloWidth = std::min(rect.width * 0.62, 520.0);
-    const double haloHeight = std::min(rect.height * 0.62, 460.0);
-    const RectF halo{(rect.width - haloWidth) / 2, (rect.height - haloHeight) / 2, haloWidth, haloHeight};
-    painter.fillRoundedRect(halo, std::min(haloWidth, haloHeight) / 2,
-                            theme.darkMode ? theme.alternateBackground.withAlpha(0.28)
-                                           : theme.text.withAlpha(0.022));
+
+    const double cardWidth = std::min(rect.width - 56.0, 640.0);
+    const double cardHeight = std::min(rect.height - 20.0, 640.0);
+    const RectF card{(rect.width - cardWidth) / 2, (rect.height - cardHeight) / 2, cardWidth,
+                     cardHeight};
+    const double radius = std::min(theme.bigRadius, 22.0);
+    const Color shadow = theme.darkMode ? Color{0, 0, 0, 70} : Color{0, 0, 0, 18};
+    painter.drawShadow(card, radius, 18, shadow, {0, 5});
+    painter.fillRoundedRect(card, radius, theme.secondBackground);
+    painter.strokeRoundedRect(card, radius, theme.text.withAlpha(0.06), painter.borderWidth(1));
 }
 
 } // namespace Clock
