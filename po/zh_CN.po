@@ -1,6 +1,13 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: lingmo-clock\n"
+"PO-Revision-Date: 2026-11-07 12:00+0800\n"
+"Last-Translator: Lingmo OS Team <team@lingmo.org>\n"
+"Language-Team: Simplified Chinese\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
 
 #: src/clockwindow.cpp
@@ -21,33 +28,170 @@ msgstr "计时器"
 
 #: src
 msgid "Alarm"
-msgstr ""
+msgstr "闹钟"
 
 #: src
 msgid "Alarm on"
-msgstr ""
+msgstr "闹钟已开启"
 
 #: src
 msgid "Alarm off"
-msgstr ""
+msgstr "闹钟已关闭"
 
 #: src
 msgid "New alarm"
-msgstr ""
+msgstr "新建闹钟"
 
 #: src
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: src
 msgid "No alarms yet"
-msgstr ""
+msgstr "暂无闹钟"
 
 #: src
 msgid "24h"
-msgstr ""
+msgstr "24 小时制"
 
 #: src
 msgid "12h"
-msgstr ""
+msgstr "12 小时制"
 
+
+msgid "Time's up!"
+msgstr "时间到！"
+
+msgid "Alarm "
+msgstr "闹钟 "
+
+msgid "Sunday"
+msgstr "星期日"
+
+msgid "Monday"
+msgstr "星期一"
+
+msgid "Tuesday"
+msgstr "星期二"
+
+msgid "Wednesday"
+msgstr "星期三"
+
+msgid "Thursday"
+msgstr "星期四"
+
+msgid "Friday"
+msgstr "星期五"
+
+msgid "Saturday"
+msgstr "星期六"
+
+msgid "January"
+msgstr "一月"
+
+msgid "February"
+msgstr "二月"
+
+msgid "March"
+msgstr "三月"
+
+msgid "April"
+msgstr "四月"
+
+msgid "May"
+msgstr "五月"
+
+msgid "June"
+msgstr "六月"
+
+msgid "July"
+msgstr "七月"
+
+msgid "August"
+msgstr "八月"
+
+msgid "September"
+msgstr "九月"
+
+msgid "October"
+msgstr "十月"
+
+msgid "November"
+msgstr "十一月"
+
+msgid "December"
+msgstr "十二月"
+
+msgid "AM"
+msgstr "上午"
+
+msgid "PM"
+msgstr "下午"
+
+#, python-brace-format
+msgid "{weekday}, {day} {month} {year}"
+msgstr "{year}年{month}{day}日，{weekday}"
+
+msgid "On"
+msgstr "开"
+
+msgid "Off"
+msgstr "关"
+
+msgid "Start"
+msgstr "开始"
+
+msgid "Lap"
+msgstr "计次"
+
+msgid "Reset"
+msgstr "重置"
+
+msgid "No laps yet"
+msgstr "暂无计次"
+
+msgid "Pause"
+msgstr "暂停"
+
+msgid "Lap time"
+msgstr "本次用时"
+
+msgid "Total time"
+msgstr "总用时"
+
+msgid "Ready"
+msgstr "就绪"
+
+msgid "Remaining"
+msgstr "剩余时间"
+
+msgid "Paused"
+msgstr "已暂停"
+
+msgid "Minutes"
+msgstr "分钟"
+
+msgid "Seconds"
+msgstr "秒"
+
+#, python-brace-format
+msgid "{n} min"
+msgstr "{n} 分钟"
+
+msgid "Tomorrow"
+msgstr "明天"
+
+msgid "Yesterday"
+msgstr "昨天"
+
+msgid "Add city"
+msgstr "添加城市"
+
+msgid "No cities yet."
+msgstr "尚未添加城市。"
+
+msgid "A clock, world clock, stopwatch and timer"
+msgstr "时钟、世界时钟、秒表和计时器"
+
+msgid "Clock;Time;Timer;Stopwatch;World;Alarm;"
+msgstr "时钟;时间;计时器;秒表;世界时钟;闹钟;"
